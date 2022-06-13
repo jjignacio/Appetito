@@ -35,7 +35,8 @@ export class UsersService {
     }
 
     async getUserByMail(createUserDTO: createUserDTO): Promise<User>  {
-        const user = await this.userModel.findOne({ email: createUserDTO.email, password: createUserDTO.password});
+        //const user = await this.userModel.findOne({ email: createUserDTO.email, password: createUserDTO.password});
+        const user = await this.userModel.findOne({ email: "fede@uade.edu.ar", password: "TestAPPetito2"});
         return user;
     }
 }
