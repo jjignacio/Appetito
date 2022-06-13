@@ -58,9 +58,8 @@ export class UsersController {
     }
 
     @Post('/login')
-    async loginPost(@Res() res, @Body() createUserDTO: createUserDTO) {
-        //console.log(createUserDTO);
-        const user = await this.userService.getUserByMail(createUserDTO)
+    async loginPost(@Res() res, @Body() postData: { email: string; password: string}) {
+        const user = await this.userService.getUserByMail(postData)
         if (!user) throw new NotFoundException('Login incorrecto');
         return res.status(HttpStatus.OK).json({
             message: 'received',
