@@ -35,7 +35,15 @@ export class UsersService {
     }
 
     async getUserByMail(postData): Promise<User>  {
-        const user = await this.userModel.findOne({ email: postData.email, alias: postData.alias, password: postData.password});
+        
+        var user;
+
+        if(!postData.email) {
+            user = await this.userModel.findOne({ alias: postData.alias, password: postData.password});
+        } else if (!postData.alias){
+            user = await this.userModel.findOne({ email: postData.email, password: postData.password});
+        }
+
         return user;
     }
 }
