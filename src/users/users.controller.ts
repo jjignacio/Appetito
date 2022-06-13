@@ -8,10 +8,19 @@ export class UsersController {
 
     constructor(private userService: UsersService) {}
 
-    @Post('/create')
+    /*@Post('/create')
     async createPost(@Res() res, @Body() createUserDTO: createUserDTO) {
         //console.log(createUserDTO);
         const user = await this.userService.createUser(createUserDTO)
+        return res.status(HttpStatus.OK).json({
+            message: 'received',
+            user: user
+        });
+    }*/
+
+    @Post('/create')
+    async createPost(@Res() res, @Body() postData: { email: string; alias: string}) {
+        const user = await this.userService.createUser(postData)
         return res.status(HttpStatus.OK).json({
             message: 'received',
             user: user
@@ -66,4 +75,6 @@ export class UsersController {
             user: user
         });
     }
+
+
 }

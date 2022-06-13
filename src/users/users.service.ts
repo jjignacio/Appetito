@@ -19,9 +19,20 @@ export class UsersService {
         return user;
     }
 
-    async createUser(createUserDTO: createUserDTO ): Promise<User>  {
+    /*async createUser(createUserDTO: createUserDTO ): Promise<User>  {
         const user = new this.userModel(createUserDTO);
         return await user.save();
+    }*/
+
+    async createUser(postData): Promise<User>  {
+        const user = await this.userModel.findOne({ alias: postData.alias});
+        if(user) {
+            const random = (Math.floor(100000 + Math.random() * 900000));
+            const optionalUser = postData.alias+random;
+            return optionalUser;
+        } else {
+            return await user.save();
+        }
     }
 
     async updateUser(userId: string, createUserDTO: createUserDTO): Promise<User>   {
