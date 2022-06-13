@@ -33,4 +33,9 @@ export class UsersService {
         const deletedUser = await this.userModel.findByIdAndDelete(userId);
         return deletedUser;
     }
+
+    async getUserByMail(createUserDTO: createUserDTO): Promise<User>  {
+        const user = await this.userModel.findOne({ email: createUserDTO.email, password: createUserDTO.password});
+        return user;
+    }
 }

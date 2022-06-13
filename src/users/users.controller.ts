@@ -56,4 +56,15 @@ export class UsersController {
             userUpdated: userUpdated
         });
     }
+
+    @Post('/login')
+    async loginPost(@Res() res, @Body() createUserDTO: createUserDTO) {
+        //console.log(createUserDTO);
+        const user = await this.userService.getUserByMail(createUserDTO)
+        if (!user) throw new NotFoundException('Login incorrecto');
+        return res.status(HttpStatus.OK).json({
+            message: 'received',
+            user: user
+        });
+    }
 }
