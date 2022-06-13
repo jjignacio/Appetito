@@ -11,7 +11,9 @@ async function bootstrap() {
   //await app.listen(3000);
 
   // Prod (Heroku) - si existe la variable de entorno PORT, la va a usar, si no, utiliza el puerto 3000.
-  await app.listen(process.env.Port || 3000); 
+  await app.listen(process.env.PORT || 3001, '0.0.0.0', () => {
+    console.log("Server is running.");
+  });
 
 }
 bootstrap();
