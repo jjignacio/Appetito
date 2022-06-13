@@ -34,16 +34,13 @@ export class UsersService {
         return deletedUser;
     }
 
-    async getUserByMail(postData): Promise<User>  {
-        
+    async login(postData): Promise<User>  {
         var user;
-
         if(!postData.email) {
             user = await this.userModel.findOne({ alias: postData.alias, password: postData.password});
         } else if (!postData.alias){
             user = await this.userModel.findOne({ email: postData.email, password: postData.password});
         }
-
         return user;
     }
 }
