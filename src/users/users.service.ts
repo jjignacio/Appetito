@@ -31,7 +31,8 @@ export class UsersService {
             const optionalUser = postData.alias+random;
             return optionalUser;
         } else {
-            return await user.save();
+            const newUser = new this.userModel(postData);
+            return await newUser.save();
         }
     }
 
