@@ -58,7 +58,7 @@ export class UsersController {
     }
 
     @Post('/login')
-    async loginPost(@Res() res, @Body() postData: { email: string; password: string}) {
+    async loginPost(@Res() res, @Body() postData: { email?: string; alias?: string; password: string}) {
         const user = await this.userService.getUserByMail(postData)
         if (!user) throw new NotFoundException('404 - (NotFound) No se encontró información');
         return res.status(HttpStatus.OK).json({
