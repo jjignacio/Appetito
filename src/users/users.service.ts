@@ -33,7 +33,7 @@ export class UsersService {
             const optionalUser2 = postData.alias + (Math.floor(100000 + Math.random() * 900000));
             const optionalUser3 = postData.alias + (Math.floor(100000 + Math.random() * 900000));
             const optionalUser4 = postData.alias + (Math.floor(100000 + Math.random() * 900000));
-            const AliasOptions = this.aliasModel.create({option1: optionalUser1, option2: optionalUser2, option3: optionalUser3, option4: optionalUser4})
+            const AliasOptions = this.aliasModel.create({option1: optionalUser1, option2: optionalUser2, option3: optionalUser3, option4: optionalUser4});
             return AliasOptions;    
         }
     }
