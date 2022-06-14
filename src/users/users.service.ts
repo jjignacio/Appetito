@@ -38,7 +38,8 @@ export class UsersService {
     }
 
     async createUser(postData): Promise<User>  {
-        const user = new this.userModel(postData);
+        // const user = new this.userModel(postData);
+        const user = new this.userModel({name: "", password: "", alias: postData.alias, enabled: false, email: postData.email, role: "", gender: "", birth: ""});
         return await user.save();
     }
 
