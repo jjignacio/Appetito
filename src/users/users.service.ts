@@ -2,13 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose'; 
 import { User } from './interfaces/users.interface'
-import { Alias } from './interfaces/alias.interface'
 import { createUserDTO } from './dto/users.dto'
 
 @Injectable()
 export class UsersService {
 
-    constructor(@InjectModel('User') private userModel: Model<User>, @InjectModel('AliasOptions') private aliasModel: Model<Alias>) {}
+    constructor(@InjectModel('User') private userModel: Model<User>) {}
     
 
     async getUsers(): Promise<User []> {
@@ -26,14 +25,14 @@ export class UsersService {
         return await user.save();
     }*/
 
-    async checkAlias(postData): Promise<Alias>  {
+    async checkAlias(postData): Promise<User>  {
         const user = await this.userModel.findOne({ alias: postData.alias});
         if(user) {
             const optionalUser1 = postData.alias + (Math.floor(100000 + Math.random() * 900000));
             const optionalUser2 = postData.alias + (Math.floor(100000 + Math.random() * 900000));
             const optionalUser3 = postData.alias + (Math.floor(100000 + Math.random() * 900000));
             const optionalUser4 = postData.alias + (Math.floor(100000 + Math.random() * 900000));
-            const AliasOptions = this.aliasModel.create({option1: optionalUser1, option2: optionalUser2, option3: optionalUser3, option4: optionalUser4});
+            const AliasOptions = this.userModel.create({aliasOptions1: optionalUser1, aliasOptions2: optionalUser2, aliasOptions3: optionalUser3, aliasOptions4: optionalUser4});
             return AliasOptions;    
         }
     }

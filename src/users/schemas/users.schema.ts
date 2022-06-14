@@ -10,6 +10,10 @@ export const UserSchema = new Schema ({
     role: { type: String },
     gender: { type: String },
     birth: { type: String },
+    aliasOptions1: { type: String },
+    aliasOptions2: { type: String },
+    aliasOptions3: { type: String },
+    aliasOptions4: { type: String },
     createdAt: {
         type: Date,
         default: Date.now
