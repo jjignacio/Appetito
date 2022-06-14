@@ -21,18 +21,10 @@ export class UsersController {
     @Post('/create')
     async createPost(@Res() res, @Body() postData: { email: string; alias: string}) {
         const alias = await this.userService.checkAlias(postData)
-        if(alias) {
-            return res.status(HttpStatus.OK).json({
-                message: 'received',
-                alias: alias
-            });
-        } else {
-            const user = await this.userService.createUser(postData)
-            return res.status(HttpStatus.OK).json({
-                message: 'received',
-                user: user
-            });
-        }
+        return res.status(HttpStatus.OK).json({
+            message: 'received',
+            alias: alias
+        });
     }
 
     @Get('/')
