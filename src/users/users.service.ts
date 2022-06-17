@@ -46,7 +46,13 @@ export class UsersService {
 
     async createUser(postData): Promise<User>  {
         // const user = new this.userModel(postData);
-        const user = new this.userModel({name: "", password: "", alias: postData.alias, enabled: false, email: postData.email, role: "Invitado", gender: "", birth: ""});
+        let temporalPassword = '';
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const charactersLength = characters.length;
+        for (let i = 0; i < 10; i++) {
+            temporalPassword += characters.charAt(Math.floor(Math.random() * charactersLength));
+        }
+        const user = new this.userModel({name: "", password: temporalPassword, alias: postData.alias, enabled: false, email: postData.email, role: "Invitado", gender: "", birth: ""});
         return await user.save();
     }
 
