@@ -37,14 +37,10 @@ export class UsersService {
         }
     }
 
-    async checkEmail(postData): Promise<Boolean>  {
+    async checkEmail(postData): Promise<User>  {
         const user = await this.userModel.findOne({ email: postData.email});
         if(user) {
-            if(user.enabled) {
-                return true;
-            } else {
-                return false;
-            }
+            return user;
         }
     }
 

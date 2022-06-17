@@ -29,7 +29,7 @@ export class UsersController {
                 alias: alias
             });
         } else if (email) {
-            if (email.valueOf) {
+            if (email.enabled) {
                 return res.status(HttpStatus.OK).json({
                     message: 'Dar la opcion de recuperar contraseña.',
                     email: true
