@@ -51,7 +51,7 @@ export class UsersService {
     }
 
     async updateUser(userAlias: string, createUserDTO: createUserDTO): Promise<User>   {
-        const updatedUser = await this.userModel.findByIdAndUpdate({alias: userAlias}, createUserDTO, {new : true});
+        const updatedUser = await this.userModel.findOneAndUpdate({alias: userAlias}, createUserDTO, {new : true});
         return updatedUser;
     }
 
