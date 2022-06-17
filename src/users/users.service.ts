@@ -37,9 +37,20 @@ export class UsersService {
         }
     }
 
+    async checkEmail(postData): Promise<Boolean>  {
+        const user = await this.userModel.findOne({ email: postData.email});
+        if(user) {
+            if(user.enabled) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
     async createUser(postData): Promise<User>  {
         // const user = new this.userModel(postData);
-        const user = new this.userModel({name: "", password: "", alias: postData.alias, enabled: false, email: postData.email, role: "", gender: "", birth: ""});
+        const user = new this.userModel({name: "", password: "", alias: postData.alias, enabled: false, email: postData.email, role: "Invitado", gender: "", birth: ""});
         return await user.save();
     }
 

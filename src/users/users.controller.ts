@@ -22,11 +22,24 @@ export class UsersController {
     @Post('/create')
     async createPost(@Res() res, @Body() postData: { email: string; alias: string}) {
         const alias = await this.userService.checkAlias(postData)
+        const email = await this.userService.checkEmail(postData)
         if(alias) {
             return res.status(HttpStatus.OK).json({
                 message: 'received',
                 alias: alias
             });
+        } else if (email) {
+            if (email.valueOf) {
+                return res.status(HttpStatus.OK).json({
+                    message: 'Dar la opcion de recuperar contraseña.',
+                    email: true
+                });
+            } else {
+                return res.status(HttpStatus.OK).json({
+                    message: 'No se puede usar este mail para registrarse.',
+                    email: false
+                });
+            }
         } else {
             const user = await this.userService.createUser(postData)
             return res.status(HttpStatus.OK).json({
