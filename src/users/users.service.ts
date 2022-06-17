@@ -50,8 +50,8 @@ export class UsersService {
         return await user.save();
     }
 
-    async updateUser(userId: string, createUserDTO: createUserDTO): Promise<User>   {
-        const updatedUser = await this.userModel.findByIdAndUpdate(userId, createUserDTO, {new : true});
+    async updateUser(userAlias: string, createUserDTO: createUserDTO): Promise<User>   {
+        const updatedUser = await this.userModel.findByIdAndUpdate({alias: userAlias}, createUserDTO, {new : true});
         return updatedUser;
     }
 

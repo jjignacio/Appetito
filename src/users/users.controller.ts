@@ -43,7 +43,7 @@ export class UsersController {
         } else {
             const user = await this.userService.createUser(postData)
             return res.status(HttpStatus.OK).json({
-                message: 'received',
+                message: '201 - (Created) Usuario creado.',
                 user: user
             });
         }
@@ -79,12 +79,12 @@ export class UsersController {
         }); 
     }
 
-    @Put('/update/:userId')
-    async updateUser(@Res() res, @Param('userId') userId, @Body() createUserDTO: createUserDTO ) {
-        const userUpdated = await this.userService.updateUser(userId, createUserDTO);
-        if (!userUpdated) throw new NotFoundException('El usuario no existe');
+    @Put('/update/:userAlias')
+    async updateUser(@Res() res, @Param('userAlias') userAlias, @Body() createUserDTO: createUserDTO ) {
+        const userUpdated = await this.userService.updateUser(userAlias, createUserDTO);
+        if (!userUpdated) throw new NotFoundException('400 - (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados.');
         return res.status(HttpStatus.OK).json({
-            message: 'Usuario actualizado correctamente',
+            message: '200 - (Created) Usuario actualizado.',
             userUpdated: userUpdated
         });
     }
