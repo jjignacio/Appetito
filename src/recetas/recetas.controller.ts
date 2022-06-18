@@ -41,7 +41,7 @@ export class RecetasController {
         
         return res.status(HttpStatus.OK).json({
             Message: "200 -  Receta encontrada satisfactoriamente",
-            receta: receta
+            receta
         });
     }
 
