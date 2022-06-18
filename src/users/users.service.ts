@@ -84,7 +84,7 @@ export class UsersService {
     async recoverPassword(userEmail, postData): Promise<User>  {
         var user = await this.userModel.findOne({ email: userEmail });
         if(user.enabled && user.role.localeCompare("Invitado") == 0) {
-            user = await this.userModel.findOneAndUpdate({ password: postData.password });
+            user = await this.userModel.findOneAndUpdate({email: userEmail}, { password: postData.password });
             return user;
         }
     }
