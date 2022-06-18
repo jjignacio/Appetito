@@ -37,7 +37,7 @@ export class RecetasController {
         
         const receta = await this.recetaService.getRecetaporNombre({ nombreReceta });
         //console.log(nombreReceta)
-        if (!receta) throw new NotFoundException('Receta inexistente')
+        if (!receta) throw new NotFoundException('Receta inexistente');
         
         return res.status(HttpStatus.OK).json({
             Message: "Receta encontrada satisfactoriamente",

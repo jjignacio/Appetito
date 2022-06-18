@@ -24,18 +24,20 @@ export class RecetasService {
        return receta;
 
     }
-    async getRecetaporNombre({ nombreReceta }: {  nombreReceta: string; }): Promise <Recetas[]> {
+    async getRecetaporNombre( nombreReceta ): Promise <Recetas[]> {
         
         
-        let receta = await this.getRecetas()
+        /*let receta = await this.getRecetas()
         //console.log(nombreReceta)
         if (nombreReceta){
             
-        receta=receta.filter(receta=>receta.nombreReceta===nombreReceta);
+            receta=receta.filter(receta=>receta.nombreReceta===nombreReceta);
      
-    }   
-        
+        }*/
+
+        const receta = await this.recetasModel.find(nombreReceta);  
         return receta;
+        
     } 
 
     async getRecetaporUsuario({ nombreUsuario }: {  nombreUsuario: string; }): Promise <Recetas[]> {
