@@ -85,7 +85,7 @@ export class UsersService {
         var user = await this.userModel.findOne({ email: userEmail });
         if(user.enabled && user.role == "Invitado") {
             user = await this.userModel.findOneAndUpdate({ password: postData.password });
+            return user;
         }
-        return user;
     }
 }
