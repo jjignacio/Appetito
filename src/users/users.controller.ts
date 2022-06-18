@@ -108,7 +108,7 @@ export class UsersController {
         });
     }
 
-    @Post('/recover/:userEmail')
+    @Put('/recover/:userEmail')
     async recoverPassword(@Res() res, @Param('userEmail') userEmail, @Body() postData: {password: string}) {
         const user = await this.userService.recoverPassword(userEmail, postData)
         if (!user) throw new NotFoundException('404 - (NotFound) No se encontró información');
