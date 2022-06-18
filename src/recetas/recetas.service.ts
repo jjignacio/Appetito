@@ -24,21 +24,11 @@ export class RecetasService {
        return receta;
 
     }
-    async getRecetaporNombre( nombreReceta ): Promise <Recetas[]> {
-        
-        
-        /*let receta = await this.getRecetas()
-        //console.log(nombreReceta)
-        if (nombreReceta){
-            
-            receta=receta.filter(receta=>receta.nombreReceta===nombreReceta);
-     
-        }*/
-
-        const receta = await this.recetasModel.find({ nombreReceta: nombreReceta });  
-        console.log(receta);
-        return receta;
-        
+    async getRecetasporNombre( nombreReceta: string ): Promise <Recetas[]> {
+        const receta = await this.recetasModel.find({ nombreReceta: nombreReceta });
+        if(receta) {
+            return receta;
+        }
     } 
 
     async getRecetaporUsuario({ nombreUsuario }: {  nombreUsuario: string; }): Promise <Recetas[]> {
@@ -85,7 +75,14 @@ export class RecetasService {
 
     async createReceta(createRecetasDTO: CreateRecetasDTO): Promise <Recetas> {
         var existe = false;
-        const recetas =  await this.recetasModel.find()
+        const recetas =  await this.recetasModel.find( {nombreReceta: createRecetasDTO.nombreReceta} )
+        if (!recetas) {
+            const receta = new this.recetasModel(createRecetasDTO);
+            return await receta.save();
+        } else {
+            throw new NotFoundException('Receta existente');
+        }
+        /*
         recetas.forEach((r)=>{
             //console.log(r.nombreReceta)
             if (r.nombreReceta==createRecetasDTO.nombreReceta && r.nombreUsuario==createRecetasDTO.nombreUsuario) {
@@ -100,7 +97,7 @@ export class RecetasService {
         } else {
             throw new NotFoundException('Receta existente')
         }       
-          
+        */ 
 
     }
     // El objeto {new: true} nos va a devolver la nueva receta actualizada//
