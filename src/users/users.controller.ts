@@ -108,5 +108,15 @@ export class UsersController {
         });
     }
 
+    @Post('/recover/:userEmail')
+    async recoverPassword(@Res() res, @Param('userEmail') userEmail, @Body() postData: {password: string}) {
+        const user = await this.userService.recoverPassword(userEmail, postData)
+        if (!user) throw new NotFoundException('404 - (NotFound) No se encontró información');
+        return res.status(HttpStatus.OK).json({
+            message: '200 - Contraseña actualizada',
+            user: user
+        });
+    }
+
 
 }
