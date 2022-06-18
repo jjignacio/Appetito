@@ -79,14 +79,23 @@ export class UsersController {
         }); 
     }
 
-    @Put('/update/:userAlias')
-    async updateUser(@Res() res, @Param('userAlias') userAlias, @Body() createUserDTO: createUserDTO ) {
-        const userUpdated = await this.userService.updateUser(userAlias, createUserDTO);
-        if (!userUpdated) throw new NotFoundException('400 - (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados.');
-        return res.status(HttpStatus.OK).json({
-            message: '200 - (Created) Usuario actualizado.',
-            userUpdated: userUpdated
-        });
+    @Put('/update/:userId')
+    async updateUser(@Res() res, @Param('userId') userId, @Body() createUserDTO: createUserDTO ) {
+        if(userId.includes("@")) {
+            const userUpdated = await this.userService.updateUserWithEmail(userId, createUserDTO);
+            if (!userUpdated) throw new NotFoundException('400 - (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados.');
+            return res.status(HttpStatus.OK).json({
+                message: '200 - (Created) Usuario actualizado.',
+                userUpdated: userUpdated
+            });
+        } else {
+            const userUpdated = await this.userService.updateUserWithAlias(userId, createUserDTO);
+            if (!userUpdated) throw new NotFoundException('400 - (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados.');
+            return res.status(HttpStatus.OK).json({
+                message: '200 - (Created) Usuario actualizado.',
+                userUpdated: userUpdated
+            });
+        }
     }
 
     @Post('/login')

@@ -56,8 +56,13 @@ export class UsersService {
         return await user.save();
     }
 
-    async updateUser(userAlias: string, createUserDTO: createUserDTO): Promise<User>   {
+    async updateUserWithAlias(userAlias: string, createUserDTO: createUserDTO): Promise<User>   {
         const updatedUser = await this.userModel.findOneAndUpdate({alias: userAlias}, createUserDTO, {new : true});
+        return updatedUser;
+    }
+
+    async updateUserWithEmail(userMail: string, createUserDTO: createUserDTO): Promise<User>   {
+        const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, createUserDTO, {new : true});
         return updatedUser;
     }
 
