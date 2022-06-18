@@ -35,7 +35,7 @@ export class RecetasService {
      
         }*/
 
-        const receta = await this.recetasModel.find(nombreReceta);  
+        const receta = await this.recetasModel.find({ nombreReceta: nombreReceta });  
         return receta;
         
     } 
