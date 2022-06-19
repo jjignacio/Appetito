@@ -58,7 +58,7 @@ export class RecetasService {
                 $not: ingrediente}});
         console.log(ingrediente)
         return receta;*/
-        const recetas = await this.recetasModel.find({ ingrediente: {ingrediente: { "$exists": false }} });
+        const recetas = await this.recetasModel.find({ ingrediente: {ingrediente: { $exists: false }} });
         return recetas;
     } 
 
