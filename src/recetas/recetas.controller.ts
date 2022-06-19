@@ -24,34 +24,30 @@ export class RecetasController {
    @Get('/:Id')
     async getReceta(@Res() res, @Param('Id') Id) {
         const receta = await this.recetaService.getReceta(Id);
-        if (!receta ) throw new NotFoundException('Receta inexistente')
+        if (!receta ) throw new NotFoundException('204 - (No Content) Respuesta vacía.')
         return res.status(HttpStatus.OK).json({
-            Message: "Ok, muestra una receta determinda",
+            Message: "200 - (Ok) Todo correcto.",
             receta
         });
     }
 
     @Get('/porNombre/:nombreReceta')
-    async getRecetaporNombre(@Res() res, @Param('nombreReceta') nombreReceta) {
-        const receta = await this.recetaService.getRecetasporNombre(nombreReceta);
-        if (receta.length == 0) throw new NotFoundException('404 - (NotFound) No se encontró información');
+    async getRecetasporNombre(@Res() res, @Param('nombreReceta') nombreReceta) {
+        const recetas = await this.recetaService.getRecetasporNombre(nombreReceta);
+        if (recetas.length == 0) throw new NotFoundException('404 - (NotFound) No se encontró información');
         return res.status(HttpStatus.OK).json({
             message: '200 -  Receta encontrada satisfactoriamente',
-            receta: receta
+            recetas: recetas
         });
     }
 
     @Get('/porUsuario/:nombreUsuario')
-    
-    async getRecetaporUsuario(@Res() res, @Param('nombreUsuario') nombreUsuario) {
-        
-        const receta = await this.recetaService.getRecetaporUsuario({ nombreUsuario });
-        //console.log(nombreUsuario)
-        if (!({ nombreUsuario })) throw new NotFoundException('Receta inexistente')
-        //console.log(nombreUsuario)
+    async getRecetasporUsuario(@Res() res, @Param('nombreUsuario') nombreUsuario) {
+        const recetas = await this.recetaService.getRecetasporUsuario(nombreUsuario);
+        if (recetas.length == 0) throw new NotFoundException('404 - (NotFound) No se encontró información');
         return res.status(HttpStatus.OK).json({
-            Message: "Receta encontrada satisfactoriamente",
-            receta
+            Message: '200 -  Receta encontrada satisfactoriamente',
+            recetas
         });
     }
     

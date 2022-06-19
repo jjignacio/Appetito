@@ -19,28 +19,22 @@ export class RecetasService {
         return recetas;
     }
 
+    // Busca una receta por su Id. 
     async getReceta(id: string): Promise <Recetas> {
        const receta = await this.recetasModel.findById(id);
        return receta;
-
     }
 
     // Busca recetas por nombre y retorna un arreglo de recetas. 
     async getRecetasporNombre( nombreReceta: string ): Promise <Recetas []> {
-        const receta = await this.recetasModel.find({ nombreReceta: nombreReceta });
-        return receta;
+        const recetas = await this.recetasModel.find({ nombreReceta: nombreReceta });
+        return recetas;
     } 
 
-    async getRecetaporUsuario({ nombreUsuario }: {  nombreUsuario: string; }): Promise <Recetas[]> {
-        
-        
-        let receta = await this.getRecetas()
-        //console.log(nombreUsuario)
-        if (nombreUsuario){
-            receta=receta.filter(receta=>receta.nombreUsuario===nombreUsuario);
-           }   
-        
-        return receta;
+    // Busca recetas por usuario y retorna un arreglo de recetas.
+    async getRecetasporUsuario( nombreUsuario: string ): Promise <Recetas []> {
+        const recetas = await this.recetasModel.find({ nombreUsuario: nombreUsuario });
+        return recetas;
     } 
 
     async getRecetaporTipo({ tipo }: {  tipo: string; }): Promise <Recetas[]> {
