@@ -13,10 +13,10 @@ export class RecetasService {
 
     constructor(@InjectModel('Recetas') private recetasModel: Model<Recetas> ) {}
 
-    async getRecetas(): Promise<Recetas []> {
+    // Busca recetas todas las recetas existentes. 
+    async getRecetas(): Promise <Recetas []> {
         const recetas =  await this.recetasModel.find()
         return recetas;
-
     }
 
     async getReceta(id: string): Promise <Recetas> {
@@ -24,6 +24,8 @@ export class RecetasService {
        return receta;
 
     }
+
+    // Busca recetas por nombre y retorna un arreglo de recetas. 
     async getRecetasporNombre( nombreReceta: string ): Promise <Recetas []> {
         const receta = await this.recetasModel.find({ nombreReceta: nombreReceta });
         return receta;

@@ -11,16 +11,16 @@ export class RecetasController {
 
     constructor(private recetaService: RecetasService) {}
 
-    
     @Get('/')
     async getRecetas(@Res() res,)  {
         const recetas = await this.recetaService.getRecetas();
-        //console.log(recetas)
+        if (recetas.length == 0) throw new NotFoundException('204 - (No Content) Respuesta vacía.');
         return res.status(HttpStatus.OK).json({
-            Message: "Ok, muestra todas las recetas",
+            Message: "200 - (Ok) Todo correcto.",
             recetas
         });
     }
+
    @Get('/:Id')
     async getReceta(@Res() res, @Param('Id') Id) {
         const receta = await this.recetaService.getReceta(Id);
