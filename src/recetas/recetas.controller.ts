@@ -101,7 +101,6 @@ export class RecetasController {
     }
 
     @Put('/:Id')
-    
     async updateReceta(@Res() res, @Param('Id') Id, @Body() createRecetasDTO: CreateRecetasDTO ) {
         const updateReceta = await this.recetaService.updateReceta(Id, createRecetasDTO);
         if (!updateReceta) throw new NotFoundException('La receta no existe');

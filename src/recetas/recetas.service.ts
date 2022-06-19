@@ -55,13 +55,14 @@ export class RecetasService {
         return recetas;
     } 
 
+    // Crea una nueva receta mientras que no exista con el mismo nombre.
     async createReceta(createRecetasDTO: CreateRecetasDTO): Promise <Recetas> {
         const recetas =  await this.recetasModel.findOne( {nombreReceta: createRecetasDTO.nombreReceta} )
         if(!recetas) {
             const receta = new this.recetasModel(createRecetasDTO);
             return await receta.save();
         } else {
-            throw new NotFoundException('Receta existente');
+            throw new NotFoundException('404 - Receta existente');
         }
         /*
         recetas.forEach((r)=>{
@@ -79,9 +80,9 @@ export class RecetasService {
             throw new NotFoundException('Receta existente')
         }       
         */ 
-
     }
-    // El objeto {new: true} nos va a devolver la nueva receta actualizada//
+
+    // El objeto {new: true} nos va a devolver la nueva receta actualizada.
     async updateReceta(id: string, createRecetasDTO: CreateRecetasDTO): Promise<Recetas> {
         const updateReceta = await this.recetasModel.findByIdAndUpdate(id, createRecetasDTO, {new: true});
         return updateReceta;
