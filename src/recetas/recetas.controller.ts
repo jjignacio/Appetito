@@ -52,17 +52,15 @@ export class RecetasController {
     }
     
     @Get('/porTipo/:tipo')
-    async getRecetaporTipo(@Res() res, @Param('tipo') tipo) {
-        
-        const receta = await this.recetaService.getRecetaporTipo({ tipo });
-        //console.log(tipo)
-        if (!receta) throw new NotFoundException('Receta inexistente')
-        
+    async getRecetasporTipo(@Res() res, @Param('tipo') tipo) {
+        const recetas = await this.recetaService.getRecetasporTipo(tipo);
+        if (recetas.length == 0) throw new NotFoundException('404 - (NotFound) No se encontró información');
         return res.status(HttpStatus.OK).json({
-            Message: "Receta encontrada satisfactoriamente",
-            receta
+            Message: '200 -  Receta encontrada satisfactoriamente',
+            recetas
         });
     }
+
     @Get('/porIngrediente/:ingrediente')
     async getRecetaporIngrediente(@Res() res, @Param('ingrediente') ingrediente) {
         

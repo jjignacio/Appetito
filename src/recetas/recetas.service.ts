@@ -37,15 +37,10 @@ export class RecetasService {
         return recetas;
     } 
 
-    async getRecetaporTipo({ tipo }: {  tipo: string; }): Promise <Recetas[]> {
-        
-        let receta = await this.getRecetas()
-        //console.log(nombreUsuario)
-        if (tipo){           
-            receta=receta.filter(receta=>receta.tipo===tipo);
-            }
-            return receta;
-    
+    // Busca recetas por tipo y retorna un arreglo de recetas.
+    async getRecetasporTipo(tipo: string): Promise <Recetas []> {
+        const recetas = await this.recetasModel.find({ tipo: tipo });
+        return recetas;
     } 
 
     async getRecetaporIngrediente(ingrediente): Promise <Recetas[]> {
