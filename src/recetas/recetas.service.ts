@@ -49,23 +49,15 @@ export class RecetasService {
         return recetas;
     }
 
-    
+    // Busca recetas por no ingrediente y retorna un arreglo de recetas.
     async getRecetasporNoIngrediente(ingre: string): Promise <Recetas []> {
-        //var existe = false;
-        /*console.log(ingrediente)
-        const receta = await this.recetasModel.find({
-           ingrediente: { 
-                $not: ingrediente}});
-        console.log(ingrediente)
-        return receta;*/
         const recetas = await this.recetasModel.find({ ingrediente: { $ne: ingre } });
         return recetas;
     } 
 
     async createReceta(createRecetasDTO: CreateRecetasDTO): Promise <Recetas> {
-        var existe = false;
-        const recetas =  await this.recetasModel.find( {nombreReceta: createRecetasDTO.nombreReceta} )
-        if (!recetas) {
+        const recetas =  await this.recetasModel.findOne( {nombreReceta: createRecetasDTO.nombreReceta} )
+        if(!recetas) {
             const receta = new this.recetasModel(createRecetasDTO);
             return await receta.save();
         } else {

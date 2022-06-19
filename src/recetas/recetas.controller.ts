@@ -71,8 +71,7 @@ export class RecetasController {
         });
     } 
     
-    @Get('/porNoIngrediente/:ingrediente')
-    //Desde el FE, pasar los parametros como un array ["Tomate","Pepino"],                   
+    @Get('/porNoIngrediente/:ingrediente')              
     async getRecetasporNoIngrediente(@Res() res, @Param('ingrediente') ingrediente) {
         const recetas = await this.recetaService.getRecetasporNoIngrediente(ingrediente);
         if (recetas.length == 0) throw new NotFoundException('404 - (NotFound) No se encontró información');
@@ -86,7 +85,7 @@ export class RecetasController {
     async createPost(@Res() res, @Body() createRecetasDTO: CreateRecetasDTO ) {
         const receta = await this.recetaService.createReceta(createRecetasDTO)
         return res.status(HttpStatus.OK).json({
-            Message: "Receta creada satisfactoriamente",
+            Message: "200 - (Created) Receta creada.",
             receta
         });
     }
