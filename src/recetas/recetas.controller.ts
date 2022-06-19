@@ -72,17 +72,13 @@ export class RecetasController {
     } 
     
     @Get('/porNoIngrediente/:ingrediente')
-    //Desde el FE, pasar los parametros como un array ["Tomate","Pepino"],
-                           
-    async getRecetaporNoIngrediente(@Res() res, @Param('ingrediente') ingrediente) {
-        
-        const receta = await this.recetaService.getRecetaporNoIngrediente({ ingrediente });
-        //console.log(ingrediente)
-        if (!receta) throw new NotFoundException('Receta inexistente')
-        
+    //Desde el FE, pasar los parametros como un array ["Tomate","Pepino"],                   
+    async getRecetasporNoIngrediente(@Res() res, @Param('ingrediente') ingrediente) {
+        const recetas = await this.recetaService.getRecetasporNoIngrediente(ingrediente);
+        if (recetas.length == 0) throw new NotFoundException('404 - (NotFound) No se encontró información');
         return res.status(HttpStatus.OK).json({
-            Message: "Receta encontrada satisfactoriamente",
-            receta
+            Message: '200 - (Ok) Todo correcto.',
+            recetas
         });
     }   
       

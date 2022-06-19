@@ -43,20 +43,23 @@ export class RecetasService {
         return recetas;
     } 
 
+    // Busca recetas por ingrediente y retorna un arreglo de recetas.
     async getRecetasporIngrediente(ingrediente: string): Promise <Recetas []> {    
         const recetas = await this.recetasModel.find({ ingrediente: ingrediente });
         return recetas;
     }
 
     
-    async getRecetaporNoIngrediente(ingrediente): Promise <Recetas[]> {
+    async getRecetasporNoIngrediente(ingrediente: string): Promise <Recetas []> {
         //var existe = false;
-        console.log(ingrediente)
+        /*console.log(ingrediente)
         const receta = await this.recetasModel.find({
            ingrediente: { 
                 $not: ingrediente}});
         console.log(ingrediente)
-        return receta;
+        return receta;*/
+        const recetas = await this.recetasModel.find({ ingrediente: { "$not": { $elemMatch: ingrediente}}});
+        return recetas;
     } 
 
     async createReceta(createRecetasDTO: CreateRecetasDTO): Promise <Recetas> {
