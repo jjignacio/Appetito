@@ -34,7 +34,7 @@ export class RecetasController {
     @Get('/porNombre/:nombreReceta')
     async getRecetaporNombre(@Res() res, @Param('nombreReceta') nombreReceta) {
         const receta = await this.recetaService.getRecetasporNombre(nombreReceta);
-        if (!receta) throw new NotFoundException('404 - (NotFound) No se encontró información');
+        if (receta.length == 0) throw new NotFoundException('404 - (NotFound) No se encontró información');
         return res.status(HttpStatus.OK).json({
             message: '200 -  Receta encontrada satisfactoriamente',
             receta: receta
