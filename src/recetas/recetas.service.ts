@@ -43,9 +43,9 @@ export class RecetasService {
         return recetas;
     } 
 
-    async getRecetasporIngrediente(ingrediente): Promise <Recetas[]> {    
-        const receta = await this.recetasModel.find(ingrediente);  
-        return receta;
+    async getRecetasporIngrediente(ingrediente: string): Promise <Recetas []> {    
+        const recetas = await this.recetasModel.find({ ingrediente: ingrediente });
+        return recetas;
     }
 
     
