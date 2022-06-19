@@ -50,7 +50,7 @@ export class RecetasService {
     }
 
     
-    async getRecetasporNoIngrediente(ingrediente: string): Promise <Recetas []> {
+    async getRecetasporNoIngrediente(ingre: string): Promise <Recetas []> {
         //var existe = false;
         /*console.log(ingrediente)
         const receta = await this.recetasModel.find({
@@ -58,7 +58,7 @@ export class RecetasService {
                 $not: ingrediente}});
         console.log(ingrediente)
         return receta;*/
-        const recetas = await this.recetasModel.find({ ingrediente: [{ingrediente: { $exists: false }}] });
+        const recetas = await this.recetasModel.find({ ingrediente: { $ne: ingre } });
         return recetas;
     } 
 
