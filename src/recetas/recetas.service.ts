@@ -27,7 +27,7 @@ export class RecetasService {
 
     // Busca recetas por nombre y retorna un arreglo de recetas. 
     async getRecetasporNombre( nombreReceta: string ): Promise <Recetas []> {
-        const recetas = await this.recetasModel.find({ nombreReceta: nombreReceta });
+        const recetas = await this.recetasModel.find({ nombreReceta: { $regex: nombreReceta }});
         return recetas;
     } 
 
