@@ -43,13 +43,10 @@ export class RecetasService {
         return recetas;
     } 
 
-    async getRecetaporIngrediente(ingrediente): Promise <Recetas[]> {
-        
+    async getRecetasporIngrediente(ingrediente): Promise <Recetas[]> {    
         const receta = await this.recetasModel.find(ingrediente);  
         return receta;
-    
-
-}
+    }
 
     
     async getRecetaporNoIngrediente(ingrediente): Promise <Recetas[]> {

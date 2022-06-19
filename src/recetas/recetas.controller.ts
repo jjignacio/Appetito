@@ -36,7 +36,7 @@ export class RecetasController {
         const recetas = await this.recetaService.getRecetasporNombre(nombreReceta);
         if (recetas.length == 0) throw new NotFoundException('404 - (NotFound) No se encontró información');
         return res.status(HttpStatus.OK).json({
-            message: '200 -  Receta encontrada satisfactoriamente',
+            message: '200 - (Ok) Todo correcto.',
             recetas: recetas
         });
     }
@@ -46,7 +46,7 @@ export class RecetasController {
         const recetas = await this.recetaService.getRecetasporUsuario(nombreUsuario);
         if (recetas.length == 0) throw new NotFoundException('404 - (NotFound) No se encontró información');
         return res.status(HttpStatus.OK).json({
-            Message: '200 -  Receta encontrada satisfactoriamente',
+            Message: '200 - (Ok) Todo correcto.',
             recetas
         });
     }
@@ -56,21 +56,18 @@ export class RecetasController {
         const recetas = await this.recetaService.getRecetasporTipo(tipo);
         if (recetas.length == 0) throw new NotFoundException('404 - (NotFound) No se encontró información');
         return res.status(HttpStatus.OK).json({
-            Message: '200 -  Receta encontrada satisfactoriamente',
+            Message: '200 - (Ok) Todo correcto.',
             recetas
         });
     }
 
     @Get('/porIngrediente/:ingrediente')
-    async getRecetaporIngrediente(@Res() res, @Param('ingrediente') ingrediente) {
-        
-        const receta = await this.recetaService.getRecetaporIngrediente({ ingrediente });
-        //console.log(ingrediente)
-        if (!receta) throw new NotFoundException('Receta inexistente')
-        
+    async getRecetasporIngrediente(@Res() res, @Param('ingrediente') ingrediente) {
+        const recetas = await this.recetaService.getRecetasporIngrediente(ingrediente);
+        if (recetas.length == 0) throw new NotFoundException('404 - (NotFound) No se encontró información');
         return res.status(HttpStatus.OK).json({
-            Message: "Receta encontrada satisfactoriamente",
-            receta
+            Message: '200 - (Ok) Todo correcto.',
+            recetas
         });
     } 
     
@@ -97,6 +94,7 @@ export class RecetasController {
             receta
         });
     }
+
     @Delete('/:Id')
     async deteleReceta(@Res() res, @Param('Id') Id) {
         const recetaEliminada =  await this.recetaService.deleteReceta(Id);
