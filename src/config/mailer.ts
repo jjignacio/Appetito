@@ -6,8 +6,8 @@
     port: 25,
     //secure: true, // true for 465, false for other ports
     auth: {
-      user: 'securesally@gmail.com', // generated ethereal user
-      pass: 'biyqhyhxpcypdqah', // generated ethereal password
+      user: 'marquezjuan2211@gmail.com', // generated ethereal user
+      pass: 'bcoavzgrbfmdnthm', // generated ethereal password
     },
   });
 
