@@ -14,5 +14,6 @@ export interface User extends Document{
     aliasOptions3: string;
     aliasOptions4: string;
     recoveryCode: string;
+    image: string;
     createdAt: Date;
 }

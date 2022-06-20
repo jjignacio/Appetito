@@ -12,5 +12,6 @@ export class createUserDTO {
     aliasOptions3: string;
     aliasOptions4: string;
     recoveryCode: string;
+    image: string;
     createdAt: Date;
 }

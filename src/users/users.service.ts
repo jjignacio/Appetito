@@ -65,12 +65,12 @@ export class UsersService {
                 from: '"Registro de usuario - APPetito" <securesally@gmail.com>', // sender address
                 to: postData.email, // list of receivers
                 subject: "Registro de usuario - APPetito", // Subject line
-                html: `<p>Hola,</p><p>Para finalizar el registro en la aplicación, debe ingresar la seguiente contraseña temporal la cual tiene una vigencia en 24 horas:</p><div style='display: flex; gap: 30px; margin-top: 1.5rem!important; margin-bottom: 1.5rem!important; padding-right: .75rem; padding-left: .75rem;'><div style='position: relative; display: flex; flex-direction: column; min-width: 0; word-wrap: break-word; background-color: #fff; background-clip: border-box; border: 1px solid rgba(0,0,0,.125); border-radius: 0.25rem; width: 50%;'><div style='display: flex; width: 100%; justify-content: center !important;'><div style='font-size: 2rem; line-height: 1.5;'><p>${temporalPassword}</p></div></div></div></div></div><p>Saludos, </p><p>- El equipo de APPetito.</p>` // html body
+                html: `<p>Hola,</p><p>Para finalizar el registro en la aplicación debe ingresar la siguiente contraseña temporal, la cual tiene una vigencia de 24 horas:</p><div style='display: flex; gap: 30px; margin-top: 1.5rem!important; margin-bottom: 1.5rem!important; padding-right: .75rem; padding-left: .75rem;'><div style='position: relative; display: flex; flex-direction: column; min-width: 0; word-wrap: break-word; background-color: #fff; background-clip: border-box; border: 1px solid rgba(0,0,0,.125); border-radius: 0.25rem; width: 50%;'><div style='display: flex; width: 100%; justify-content: center !important;'><div style='font-size: 2rem; line-height: 1.5;'><p>${temporalPassword}</p></div></div></div></div></div><p>Saludos, </p><p>- El equipo de APPetito.</p>` // html body
             });
         } catch (error) {
             throw new ServiceUnavailableException(error);
         }
-        const user = new this.userModel({name: "", password: temporalPassword, alias: postData.alias, enabled: false, email: postData.email, role: "Invitado", gender: "", birth: "", recoveryCode: ""});
+        const user = new this.userModel({name: "", password: temporalPassword, alias: postData.alias, enabled: false, email: postData.email, role: "Invitado", gender: "", birth: "", recoveryCode: "", image: "https://img.freepik.com/vector-gratis/perfil-avatar-hombre-icono-redondo_24640-14044.jpg?w=740"});
         return await user.save();
     }
 

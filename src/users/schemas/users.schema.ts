@@ -15,6 +15,7 @@ export const UserSchema = new Schema ({
     aliasOptions3: { type: String },
     aliasOptions4: { type: String },
     recoveryCode: { type: String },
+    image: { type: String },
     createdAt: {
         type: Date,
         default: Date.now
