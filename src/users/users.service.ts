@@ -85,12 +85,14 @@ export class UsersService {
 
     async recoverPassword(userEmail, postData): Promise<User>  {
         try {
+            var data = require('templateMail.html');
             // send mail with defined transport object
             await this.mailerService.sendMail({
-                from: '"Forgot password 👻" <securesally@gmail.com>', // sender address
+                from: '"Recupero de contraseña - APPetito" <securesally@gmail.com>', // sender address
                 to: "marquezjuan2211@gmail.com", // list of receivers
-                subject: "Forgot password 👻", // Subject line
-                html: "<b>Hello world?</b>", // html body
+                subject: "Recupero de contraseña - APPetito", // Subject line
+                //html: "<b>Hello world?</b>", // html body
+                html: data, // html body
             });
         } catch (error) {
             throw new ServiceUnavailableException(error);
