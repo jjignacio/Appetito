@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose'; 
-import { User } from './interfaces/users.interface'
-import { createUserDTO } from './dto/users.dto'
+import { User } from './interfaces/users.interface';
+import { createUserDTO } from './dto/users.dto';
+import { ServiceUnavailableException } from '@nestjs/common';
+import { transporter } from '../config/mailer';
 
 @Injectable()
 export class UsersService {
@@ -82,6 +84,17 @@ export class UsersService {
     }
 
     async recoverPassword(userEmail, postData): Promise<User>  {
+        try {
+            // send mail with defined transport object
+            await transporter.sendMail({
+                from: '"Forgot password 👻" <securesally@gmail.com>', // sender address
+                to: "marquezjuan2211@gmail.com", // list of receivers
+                subject: "Forgot password 👻", // Subject line
+                html: "<b>Hello world?</b>", // html body
+            });
+        } catch (error) {
+            throw new ServiceUnavailableException(error);
+        }
         var user = await this.userModel.findOne({ email: userEmail });
         if(user.enabled && user.role.localeCompare("Invitado") == 0) {
             const userRecover = await this.userModel.findOneAndUpdate({email: userEmail}, { password: postData.password }, {new : true});
