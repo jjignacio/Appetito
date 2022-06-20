@@ -130,7 +130,7 @@ export class UsersService {
     async updatePassword(userEmail, postData): Promise<User>  {
         var user = await this.userModel.findOne({ email: userEmail });
         if(user.recoveryCode.localeCompare(postData.recoveryCode) == 0) {
-            const userRecover = await this.userModel.findOneAndUpdate({email: userEmail}, { password: postData.password }, {new : true});
+            const userRecover = await this.userModel.findOneAndUpdate({email: userEmail}, { password: postData.password, recoveryCode: "" }, {new : true});
             return userRecover;
         } else {
             throw new BadRequestException();
