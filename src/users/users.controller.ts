@@ -111,7 +111,7 @@ export class UsersController {
     @Put('/recover/:userEmail')
     async recoverPassword(@Res() res, @Param('userEmail') userEmail, @Body() postData: {password?: string; recoveryCode?: string;}) {
         if(postData.password) {
-            const user = await this.userService.getByEmail(userEmail);
+            const user = await this.userService.getUserByEmail(userEmail);
             if (!user) {
                 throw new NotFoundException('404 - (NotFound) No se encontró información');
             } else {
@@ -123,12 +123,18 @@ export class UsersController {
                 });
             }
         } else {
-            const user = await this.userService.recoverPassword(userEmail)
-            if (!user) throw new NotFoundException('404 - (NotFound) No se encontró información');
-            return res.status(HttpStatus.OK).json({
-                message: '200 - Email enviado',
-                user: user
-            });
+            const user = await this.userService.getUserByEmail(userEmail);
+            if (!user) {
+                throw new NotFoundException('404 - (NotFound) No se encontró información');
+            } else {
+                const userUpdated = await this.userService.recoverPassword(userEmail)
+                if (!userUpdated) throw new NotFoundException('404 - (NotFound) No se encontró información');
+                return res.status(HttpStatus.OK).json({
+                    message: '200 - Email enviado',
+                    user: userUpdated
+                });
+            }
+            
         }
     }
 }
