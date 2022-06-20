@@ -106,14 +106,14 @@ export class UsersService {
             let recoveryCode = '';
             const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
             const charactersLength = characters.length;
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < 6; i++) {
                 recoveryCode += characters.charAt(Math.floor(Math.random() * charactersLength));
             }
             try {
                 // send mail with defined transport object
                 await this.mailerService.sendMail({
                     from: '"Recupero de contraseña - APPetito" <securesally@gmail.com>', // sender address
-                    to: "marquezjuan2211@gmail.com", // list of receivers
+                    to: userEmail, // list of receivers
                     subject: "Recupero de contraseña - APPetito", // Subject line
                     html: `<p>Hola,</p><p>Para restaurar tu contraseña ingresá el siguiente código en la aplicación:</p><div style='display: flex; gap: 30px; margin-top: 1.5rem!important; margin-bottom: 1.5rem!important; padding-right: .75rem; padding-left: .75rem;'><div style='position: relative; display: flex; flex-direction: column; min-width: 0; word-wrap: break-word; background-color: #fff; background-clip: border-box; border: 1px solid rgba(0,0,0,.125); border-radius: 0.25rem; width: 50%;'><div style='display: flex; width: 100%; justify-content: center !important;'><div style='font-size: 2rem; line-height: 1.5;'>${recoveryCode}</div></div></div></div></div><p>Si tú no iniciaste el proceso para recuperar tu contraseña, ignora este mail y no sucederá nada.</p><p>Saludos, </p><p>- El equipo de APPetito.</p>` // html body
                 });
