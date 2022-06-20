@@ -4,12 +4,12 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User } from './interfaces/users.interface';
 import { createUserDTO } from './dto/users.dto';
 import { ServiceUnavailableException } from '@nestjs/common';
-import { transporter } from '../config/mailer';
+import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
 export class UsersService {
 
-    constructor(@InjectModel('User') private userModel: Model<User>) {}
+    constructor(@InjectModel('User') private userModel: Model<User>, private readonly mailerService: MailerService) {}
     
 
     async getUsers(): Promise<User []> {
@@ -86,7 +86,7 @@ export class UsersService {
     async recoverPassword(userEmail, postData): Promise<User>  {
         try {
             // send mail with defined transport object
-            await transporter.sendMail({
+            await this.mailerService.sendMail({
                 from: '"Forgot password 👻" <securesally@gmail.com>', // sender address
                 to: "marquezjuan2211@gmail.com", // list of receivers
                 subject: "Forgot password 👻", // Subject line
