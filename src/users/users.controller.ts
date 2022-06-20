@@ -109,14 +109,26 @@ export class UsersController {
     }
 
     @Put('/recover/:userEmail')
-    async recoverPassword(@Res() res, @Param('userEmail') userEmail, @Body() postData: {password: string}) {
-        const user = await this.userService.recoverPassword(userEmail, postData)
-        if (!user) throw new NotFoundException('404 - (NotFound) No se encontró información');
-        return res.status(HttpStatus.OK).json({
-            message: '200 - Contraseña actualizada',
-            user: user
-        });
+    async recoverPassword(@Res() res, @Param('userEmail') userEmail, @Body() postData?: {password: string; recoveryCode: string;}) {
+        if(postData) {
+            const user = await this.userService.checkEmail(postData);
+            if (!user) {
+                throw new NotFoundException('404 - (NotFound) No se encontró información');
+            } else {
+                const updateUserPassword = await this.userService.updatePassword(userEmail, postData);
+                if (!updateUserPassword) throw new NotFoundException('404 - (NotFound) No se encontró información');
+                return res.status(HttpStatus.OK).json({
+                    message: '200 - Contraseña actualizada',
+                    user: user
+                });
+            }
+        } else {
+            const user = await this.userService.recoverPassword(userEmail)
+            if (!user) throw new NotFoundException('404 - (NotFound) No se encontró información');
+            return res.status(HttpStatus.OK).json({
+                message: '200 - Email enviado',
+                user: user
+            });
+        }
     }
-
-
 }
