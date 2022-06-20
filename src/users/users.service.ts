@@ -132,6 +132,8 @@ export class UsersService {
         if(user.recoveryCode.localeCompare(postData.recoveryCode) == 0) {
             const userRecover = await this.userModel.findOneAndUpdate({email: userEmail}, { password: postData.password }, {new : true});
             return userRecover;
+        } else {
+            throw new ForbiddenException();
         }
     }
 }

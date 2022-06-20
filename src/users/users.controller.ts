@@ -119,7 +119,7 @@ export class UsersController {
                 if (!updateUserPassword) throw new NotFoundException('404 - (NotFound) No se encontró información');
                 return res.status(HttpStatus.OK).json({
                     message: '200 - Contraseña actualizada',
-                    user: user
+                    user: updateUserPassword
                 });
             }
         } else {
