@@ -85,7 +85,7 @@ export class UsersService {
 
     async recoverPassword(userEmail, postData): Promise<User>  {
         try {
-            var data = require('templateMail.html');
+            var data = require('.templateMail.html');
             // send mail with defined transport object
             await this.mailerService.sendMail({
                 from: '"Recupero de contraseña - APPetito" <securesally@gmail.com>', // sender address
