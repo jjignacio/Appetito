@@ -3,7 +3,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose'; 
 import { User } from './interfaces/users.interface';
 import { createUserDTO } from './dto/users.dto';
-import { ServiceUnavailableException, ForbiddenException } from '@nestjs/common';
+import { ServiceUnavailableException, ForbiddenException, BadRequestException } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
@@ -133,7 +133,7 @@ export class UsersService {
             const userRecover = await this.userModel.findOneAndUpdate({email: userEmail}, { password: postData.password }, {new : true});
             return userRecover;
         } else {
-            throw new ForbiddenException();
+            throw new BadRequestException();
         }
     }
 }
