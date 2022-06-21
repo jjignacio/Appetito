@@ -14,8 +14,7 @@ import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handleba
     UsersModule, 
     RecetasModule,
     MailerModule.forRoot({
-      //transport: 'smtps://marquezjuan2211@gmail.com:bcoavzgrbfmdnthm@smtp.gmail.com',
-      transport: 'smtps://adminAPI@gmail.com:biyqhyhxpcypdqah@smtp.gmail.com',
+      transport: 'smtps://marquezjuan2211@gmail.com:bcoavzgrbfmdnthm@smtp.gmail.com',
       defaults: {
         from: '"nest-modules" <modules@nestjs.com>',
       },
