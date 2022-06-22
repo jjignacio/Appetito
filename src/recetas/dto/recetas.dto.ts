@@ -11,7 +11,7 @@ export class CreateRecetasDTO {
     cantidadPersonas: number;
     duracion: number;
     dificultad: string;
-    ingrediente: [
+    ingredientes: [
         {
             ingrediente: string,
             cantidad: string,

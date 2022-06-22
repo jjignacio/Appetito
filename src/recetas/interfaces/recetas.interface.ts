@@ -10,7 +10,7 @@ export interface Recetas extends Document {
     cantidadPersonas: number;
     duracion: number;
     dificultad: string;
-    ingrediente: [
+    ingredientes: [
         {
             ingrediente: string,
             cantidad: string,
