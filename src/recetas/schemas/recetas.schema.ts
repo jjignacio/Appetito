@@ -14,7 +14,7 @@ export const RecetasSchema = new Schema ({
     cantidadPersonas: Number,
     duracion: Number,
     dificultad: String,
-    ingrediente: [String],
+    ingrediente: [{String}],
     tipo: String,
     resenias: String,
     calificacion: Number,
