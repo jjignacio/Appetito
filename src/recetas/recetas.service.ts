@@ -44,8 +44,8 @@ export class RecetasService {
     } 
 
     // Busca recetas por ingrediente y retorna un arreglo de recetas.
-    async getRecetasporIngrediente(ingrediente: string): Promise <Recetas []> {    
-        const recetas = await this.recetasModel.find({ ingrediente: ingrediente });
+    async getRecetasporIngrediente(ingre: string): Promise <Recetas []> {    
+        const recetas = await this.recetasModel.find({ ingrediente: { ingrediente: ingre } });
         return recetas;
     }
 
