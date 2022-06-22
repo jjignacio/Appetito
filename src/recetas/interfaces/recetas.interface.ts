@@ -10,7 +10,13 @@ export interface Recetas extends Document {
     cantidadPersonas: number;
     duracion: number;
     dificultad: string;
-    ingrediente: string[];
+    ingrediente: [
+        {
+            ingrediente: string,
+            cantidad: string,
+            unidad: string
+        }
+    ]
     tipo: string;
     resenias: string;
     calificacion: number;
