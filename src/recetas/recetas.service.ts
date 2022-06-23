@@ -33,7 +33,7 @@ export class RecetasService {
 
     // Busca recetas por usuario y retorna un arreglo de recetas.
     async getRecetasporUsuario( nombreUsuario: string ): Promise <Recetas []> {
-        const recetas = await this.recetasModel.find({ nombreUsuario: nombreUsuario });
+        const recetas = await this.recetasModel.find({ nombreUsuario: { $regex: nombreUsuario }});
         return recetas;
     } 
 
@@ -45,7 +45,7 @@ export class RecetasService {
 
     // Busca recetas por ingrediente y retorna un arreglo de recetas.
     async getRecetasporIngrediente(ingre: string): Promise <Recetas []> {    
-        const recetas = await this.recetasModel.find().elemMatch('ingredientes', { ingrediente: ingre });
+        const recetas = await this.recetasModel.find().elemMatch('ingredientes', { ingrediente: { $regex: ingre }});
         return recetas;
     }
 
