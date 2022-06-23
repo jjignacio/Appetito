@@ -52,7 +52,7 @@ export class RecetasService {
     // Busca recetas por no ingrediente y retorna un arreglo de recetas.
     async getRecetasporNoIngrediente(ingre: string): Promise <Recetas []> {
         //const recetas = await this.recetasModel.find({ ingrediente: { $ne: ingre } });
-        const recetas = await this.recetasModel.find().elemMatch('ingredientes', { ingrediente: { $ne: ingre } });
+        const recetas = await this.recetasModel.find({'ingredientes.ingrediente': { $ne: ingre }});
         return recetas;
     } 
 
