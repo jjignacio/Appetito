@@ -154,9 +154,9 @@ export class UsersService {
         //const userUpdated = await user.update({ $push: { favorites: postData } });
         
         
+        //const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $push: {favorites: [{idReceta: postData.idReceta, nameReceta: postData.nameReceta, createdAt: postData.createdAt}]}}, {new : true});
 
-
-        const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $push: {favorites: [{idReceta: postData.idReceta, nameReceta: postData.nameReceta, createdAt: postData.createdAt}]}});
+        const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $push: {name: "cacho"}}, {new : true});
         return updatedUser;
     }
 }
