@@ -16,6 +16,16 @@ export const UserSchema = new Schema ({
     aliasOptions4: { type: String },
     recoveryCode: { type: String },
     image: { type: String },
+    favorites: [{
+        idReceta: String,
+        nameReceta: String,
+        createdAt: Date
+    }],
+    recetas: [{
+        idReceta: String,
+        nameReceta: String,
+        createdAt: Date
+    }],
     createdAt: {
         type: Date,
         default: Date.now

@@ -15,5 +15,19 @@ export interface User extends Document{
     aliasOptions4: string;
     recoveryCode: string;
     image: string;
+    favorites: [
+        {
+            idReceta: string,
+            nameReceta: string,
+            createdAt: Date
+        }
+    ];
+    recetas: [
+        {
+            idReceta: string,
+            nameReceta: string,
+            createdAt: Date
+        }
+    ];
     createdAt: Date;
 }

@@ -70,7 +70,19 @@ export class UsersService {
         } catch (error) {
             throw new ServiceUnavailableException(error);
         }
-        const user = new this.userModel({name: "", password: temporalPassword, alias: postData.alias, enabled: false, email: postData.email, role: "Invitado", gender: "", birth: "", recoveryCode: "", image: "https://img.freepik.com/vector-gratis/perfil-avatar-hombre-icono-redondo_24640-14044.jpg?w=740"});
+        const user = new this.userModel({
+            name: "", 
+            password: temporalPassword, 
+            alias: postData.alias, 
+            enabled: false, 
+            email: postData.email, 
+            role: "Invitado", 
+            gender: "", 
+            birth: "", 
+            recoveryCode: "", 
+            image: "https://img.freepik.com/vector-gratis/perfil-avatar-hombre-icono-redondo_24640-14044.jpg?w=740",
+            favorites: {idReceta: "", nameReceta: "", createdAt: ""},
+            recetas: {idReceta: "", nameReceta: "", createdAt: ""} });
         return await user.save();
     }
 
