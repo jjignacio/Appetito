@@ -148,4 +148,9 @@ export class UsersService {
             throw new BadRequestException();
         }
     }
+
+    async createFavorite(userMail: string, postData): Promise<User>   {
+        const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, {favorites: {idReceta: postData.idReceta, nameReceta: postData.nameReceta, createdAt: postData.createdAt} }, {new : true});
+        return updatedUser;
+    }
 }

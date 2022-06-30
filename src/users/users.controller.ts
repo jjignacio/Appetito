@@ -137,4 +137,14 @@ export class UsersController {
             
         }
     }
+
+    @Put('/favorito/:userEmail')
+    async createFavorite(@Res() res, @Param('userEmail') userEmail, @Body() postData: { idReceta: string; nameReceta: string; createdAt: string} ) {
+        const userUpdated = await this.userService.createFavorite(userEmail, postData);
+        if (!userUpdated) throw new NotFoundException('400 - (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados.');
+        return res.status(HttpStatus.OK).json({
+            message: '200 - (Created) Usuario actualizado.',
+            userUpdated: userUpdated
+        });
+    }
 }
