@@ -84,6 +84,7 @@ export class RecetasController {
     @Post('/')
     async createPost(@Res() res, @Body() createRecetasDTO: CreateRecetasDTO ) {
         const receta = await this.recetaService.createReceta(createRecetasDTO)
+        if (!receta ) throw new NotFoundException('Receta inexistente');
         return res.status(HttpStatus.OK).json({
             Message: "200 - (Created) Receta creada.",
             receta
