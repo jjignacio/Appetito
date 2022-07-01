@@ -165,8 +165,8 @@ export class UsersService {
     }
 
     async deleteRecipe(userMail: string, postData): Promise<User>   {
-        const user = await this.userModel.findOne({email: userMail, "recetas": {idReceta: postData.idReceta}});
-        if (user) {
+        const recipe = await this.userModel.find({ email: userMail}).elemMatch('recetas', { idReceta: { $regex: postData.idReceta }});
+        if (recipe) {
             const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $pull: {"recetas": {idReceta: postData.idReceta}}}, {new : true});
             return updatedUser;
         }

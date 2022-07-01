@@ -168,7 +168,7 @@ export class UsersController {
         });
     }
 
-    @Delete('/nuevaReceta/:userEmail')
+    @Delete('/borrarReceta/:userEmail')
     async deleteRecipe(@Res() res, @Param('userEmail') userEmail, @Body() postData: { idReceta: string} ) {
         const userUpdated = await this.userService.deleteRecipe(userEmail, postData);
         if (!userUpdated) throw new NotFoundException('400 - (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados.');
