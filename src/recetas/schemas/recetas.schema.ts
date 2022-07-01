@@ -1,10 +1,8 @@
 // Defineremos que es lo que vamos a guardar dentro de mondodb//
-
 import { Schema } from "mongoose";
 
-
 export const RecetasSchema = new Schema ({
-    
+    idUsuario: String,
     nombreUsuario: String,
     nombreReceta: String,
     titulo: String,
@@ -14,21 +12,27 @@ export const RecetasSchema = new Schema ({
     cantidadPersonas: Number,
     duracion: Number,
     dificultad: String,
+    tipo: String,
+    validada: Boolean,
+    reseñas: [{
+            calificacion: Number,
+            comentario: String,
+            fecha: Date 
+    }],
+    puntuacion: Number,
+    pasos: [{
+            paso: String,
+            descripcion: String,
+            image: String,
+            videoImage: String
+    }],
     ingredientes: [{
         ingrediente: String,
         cantidad: String,
         unidad: String
     }],
-    tipo: String,
-    resenias: String,
-    calificacion: Number,
-    comentario:String,
-    pasos: String,    
     createdAt: {
         type: Date,
         default: Date.now
         }
-    
-    }
-    
-    );
+    });

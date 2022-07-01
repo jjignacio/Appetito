@@ -1,6 +1,7 @@
 import { Document } from "mongoose";
 
 export interface Recetas extends Document {
+    idUsuario: string;
     nombreUsuario: string;
     nombreReceta: string;
     titulo: string;
@@ -10,6 +11,24 @@ export interface Recetas extends Document {
     cantidadPersonas: number;
     duracion: number;
     dificultad: string;
+    tipo: string;
+    validada: boolean;
+    reseñas: [ 
+        {
+            calificacion: number,
+            comentario: string,
+            fecha: Date 
+        } 
+    ];
+    puntuacion: number;
+    pasos: [
+        {
+            paso: string,
+            descripcion: string,
+            image: string,
+            videoImage: string
+        }
+    ];
     ingredientes: [
         {
             ingrediente: string,
@@ -17,13 +36,5 @@ export interface Recetas extends Document {
             unidad: string
         }
     ]
-    tipo: string;
-    resenias: string;
-    calificacion: number;
-    pasos: string;
-    comentario:string;
     createdAt: Date;
-    
-
-
 }
