@@ -150,15 +150,12 @@ export class UsersService {
     }
 
     async createFavorite(userMail: string, postData): Promise<User>   {
-        //const userUpdated = await this.userModel.findOneAndUpdate({ email: userMail}, { $push: { favorites: postData } });
-        //const user = await this.userModel.findOne({ email: userMail});
-        //await user.update({ $push: {favorites: [{idReceta: postData.idReceta, nameReceta: postData.nameReceta, createdAt: postData.createdAt}]}});
-        //const updatedUser = await this.userModel.findOne({ email: userMail});
-        
-        
         const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $push: {"favorites": {idReceta: postData.idReceta, nameReceta: postData.nameReceta, createdAt: postData.createdAt}}}, {new : true});
+        return updatedUser;
+    }
 
-        //const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $push: {name: "cacho"}}, {new : true});
+    async deleteFavorite(userMail: string, postData): Promise<User>   {
+        const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $pullAll: {"favorites": {idReceta: postData.idReceta}}}, {new : true});
         return updatedUser;
     }
 }

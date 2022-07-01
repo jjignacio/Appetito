@@ -147,4 +147,14 @@ export class UsersController {
             userUpdated: userUpdated
         });
     }
+
+    @Delete('/favorito/:userEmail')
+    async deleteFavorite(@Res() res, @Param('userEmail') userEmail, @Body() postData: { idReceta: string} ) {
+        const userUpdated = await this.userService.deleteFavorite(userEmail, postData);
+        if (!userUpdated) throw new NotFoundException('400 - (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados.');
+        return res.status(HttpStatus.OK).json({
+            message: '200 - (Created) Usuario actualizado.',
+            userUpdated: userUpdated
+        });
+    }
 }
