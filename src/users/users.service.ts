@@ -158,4 +158,14 @@ export class UsersService {
         const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $pull: {"favorites": {idReceta: postData.idReceta}}}, {new : true});
         return updatedUser;
     }
+
+    async createRecipe(userMail: string, postData): Promise<User>   {
+        const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $push: {"recetas": {idReceta: postData.idReceta, nameReceta: postData.nameReceta, createdAt: postData.createdAt}}}, {new : true});
+        return updatedUser;
+    }
+
+    async deleteRecipe(userMail: string, postData): Promise<User>   {
+        const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $pull: {"recetas": {idReceta: postData.idReceta}}}, {new : true});
+        return updatedUser;
+    }
 }
