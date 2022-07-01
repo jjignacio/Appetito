@@ -19,6 +19,7 @@ export const UserSchema = new Schema ({
     favorites: [{
         idReceta: String,
         nameReceta: String,
+        image: String,
         createdAt: Date
     }],
     recetas: [{

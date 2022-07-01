@@ -150,7 +150,7 @@ export class UsersService {
     }
 
     async createFavorite(userMail: string, postData): Promise<User>   {
-        const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $push: {"favorites": {idReceta: postData.idReceta, nameReceta: postData.nameReceta, createdAt: postData.createdAt}}}, {new : true});
+        const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $push: {"favorites": {idReceta: postData.idReceta, nameReceta: postData.nameReceta, image: postData.image, createdAt: postData.createdAt}}}, {new : true});
         return updatedUser;
     }
 

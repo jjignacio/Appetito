@@ -139,7 +139,7 @@ export class UsersController {
     }
 
     @Put('/favorito/:userEmail')
-    async createFavorite(@Res() res, @Param('userEmail') userEmail, @Body() postData: { idReceta: string; nameReceta: string; createdAt: string} ) {
+    async createFavorite(@Res() res, @Param('userEmail') userEmail, @Body() postData: { idReceta: string; nameReceta: string; image: string; createdAt: string} ) {
         const userUpdated = await this.userService.createFavorite(userEmail, postData);
         if (!userUpdated) throw new NotFoundException('404 - (NotFound) No se encontró información.');
         return res.status(HttpStatus.OK).json({
