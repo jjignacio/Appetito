@@ -155,8 +155,11 @@ export class UsersService {
     }
 
     async deleteFavorite(userMail: string, postData): Promise<User>   {
-        const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $pull: {"favorites": {idReceta: postData.idReceta}}}, {new : true});
-        return updatedUser;
+        const favorite = await this.userModel.findOne({ email: userMail, 'favorites.idReceta': postData.idReceta });
+        if (favorite) {
+            const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $pull: {"favorites": {idReceta: postData.idReceta}}}, {new : true});
+            return updatedUser;
+        }
     }
 
     async createRecipe(userMail: string, postData): Promise<User>   {
