@@ -4,10 +4,8 @@ export class CreateRecetasDTO {
     idUsuario: string;
     nombreUsuario: string;
     nombreReceta: string;
-    titulo: string;
     descripcion: string;
-    imagenes: string;
-    multimedia: string;
+    imagen: string;
     cantidadPersonas: number;
     duracion: number;
     dificultad: string;

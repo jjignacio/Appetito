@@ -24,7 +24,7 @@ export class RecetasController {
    @Get('/:Id')
     async getReceta(@Res() res, @Param('Id') Id) {
         const receta = await this.recetaService.getReceta(Id);
-        if (!receta ) throw new NotFoundException('204 - (No Content) Respuesta vacía.')
+        if (!receta ) throw new NotFoundException('Receta inexistente')
         return res.status(HttpStatus.OK).json({
             Message: "200 - (Ok) Todo correcto.",
             receta
