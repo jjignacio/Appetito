@@ -3,7 +3,7 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose'; 
 import { User } from './interfaces/users.interface';
 import { createUserDTO } from './dto/users.dto';
-import { ServiceUnavailableException, ForbiddenException, BadRequestException } from '@nestjs/common';
+import { ServiceUnavailableException, ForbiddenException, BadRequestException, NotFoundException } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
 
 @Injectable()
@@ -165,7 +165,10 @@ export class UsersService {
     }
 
     async deleteRecipe(userMail: string, postData): Promise<User>   {
-        const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $pull: {"recetas": {idReceta: postData.idReceta}}}, {new : true});
-        return updatedUser;
+        const user = await this.userModel.findOne({email: userMail, recetas: {idReceta: postData.idReceta}});
+        if (user) {
+            const updatedUser = await this.userModel.findOneAndUpdate({email: userMail}, { $pull: {"recetas": {idReceta: postData.idReceta}}}, {new : true});
+            return updatedUser;
+        }
     }
 }
