@@ -71,7 +71,7 @@ export class RecetasService {
 
     // El objeto {new: true} nos va a devolver la nueva receta actualizada.
     async updateReceta(id: string, createRecetasDTO: CreateRecetasDTO): Promise<Recetas> {
-        const updateReceta = await this.recetasModel.findByIdAndUpdate(id, createRecetasDTO, {new: true});
+        const updateReceta = await this.recetasModel.findByIdAndUpdate({ _id: id }, createRecetasDTO, {new: true});
         return updateReceta;
     }
 
