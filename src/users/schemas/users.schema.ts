@@ -25,6 +25,7 @@ export const UserSchema = new Schema ({
     recetas: [{
         idReceta: String,
         nameReceta: String,
+        image: String,
         createdAt: Date
     }],
     createdAt: {

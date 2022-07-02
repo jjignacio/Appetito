@@ -25,6 +25,7 @@ export class createUserDTO {
         {
             idReceta: string,
             nameReceta: string,
+            image: string,
             createdAt: Date
         }
     ];

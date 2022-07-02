@@ -27,6 +27,7 @@ export interface User extends Document{
         {
             idReceta: string,
             nameReceta: string,
+            image: string,
             createdAt: Date
         }
     ];
