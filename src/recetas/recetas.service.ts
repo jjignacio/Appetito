@@ -75,10 +75,13 @@ export class RecetasService {
         return updateReceta;
     }
 
-    // El objeto {new: true} nos va a devolver la nueva receta actualizada.
+    // El objeto {new: true} nos va a devolver la nueva receta reeplazada.
     async replaceReceta(id: string, createRecetasDTO: CreateRecetasDTO): Promise<Recetas> {
-        const replaceReceta = await this.recetasModel.findOneAndReplace({ _id: id }, createRecetasDTO, {new: true});
-        return replaceReceta;
+        const receta = await this.recetasModel.findById(id);
+        if (receta) {
+            const replaceReceta = await this.recetasModel.findOneAndReplace({ _id: id }, createRecetasDTO, {new: true});
+            return replaceReceta;
+        }
     }
 
     async deleteReceta (id: string ): Promise<Recetas> {
