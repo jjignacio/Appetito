@@ -159,7 +159,7 @@ export class UsersController {
     }
 
     @Put('/nuevaReceta/:userEmail')
-    async createRecipe(@Res() res, @Param('userEmail') userEmail, @Body() postData: { idReceta: string; nameReceta: string; createdAt: string} ) {
+    async createRecipe(@Res() res, @Param('userEmail') userEmail, @Body() postData: { idReceta: string; nameReceta: string; image: string; createdAt: string} ) {
         const userUpdated = await this.userService.createRecipe(userEmail, postData);
         if (!userUpdated) throw new NotFoundException('400 - (Bad Request) Los datos enviados son incorrectos o hay datos obligatorios no enviados.');
         return res.status(HttpStatus.OK).json({
