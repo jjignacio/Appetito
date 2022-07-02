@@ -110,5 +110,15 @@ export class RecetasController {
             updateReceta
         });
     }
+
+    @Put('/:Id')
+    async replaceReceta(@Res() res, @Param('Id') Id, @Body() createRecetasDTO: CreateRecetasDTO ) {
+        const updateReceta = await this.recetaService.replaceReceta(Id, createRecetasDTO);
+        if (!updateReceta) throw new NotFoundException('La receta no existe');
+        return res.status(HttpStatus.OK).json({
+            message: 'Receta reemplazada correctamente',
+            updateReceta
+        });
+    }
 }
  
