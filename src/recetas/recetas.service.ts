@@ -19,15 +19,15 @@ export class RecetasService {
         return recetas;
     }
 
-    // Busca una receta por su Id. 
+    // Busca una receta por su Id y que estén validadas. 
     async getReceta(id: string): Promise <Recetas> {
        const receta = await this.recetasModel.findOne({ _id: id, validada: true });
        return receta;
     }
 
-    // Busca recetas por nombre y retorna un arreglo de recetas. 
+    // Busca recetas por nombre y retorna un arreglo de recetas. Tienen que estár validadas.
     async getRecetasporNombre( nombreReceta: string ): Promise <Recetas []> {
-        const recetas = await this.recetasModel.find({ nombreReceta: { $regex: nombreReceta }});
+        const recetas = await this.recetasModel.find({ nombreReceta: { $regex: nombreReceta }, validada: true});
         return recetas;
     } 
 
