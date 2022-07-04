@@ -21,7 +21,7 @@ export class RecetasService {
 
     // Busca una receta por su Id. 
     async getReceta(id: string): Promise <Recetas> {
-       const receta = await this.recetasModel.findById(id);
+       const receta = await this.recetasModel.findById({ id, validada: true });
        return receta;
     }
 

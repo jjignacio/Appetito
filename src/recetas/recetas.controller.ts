@@ -14,7 +14,7 @@ export class RecetasController {
     @Get('/')
     async getRecetas(@Res() res,)  {
         const recetas = await this.recetaService.getRecetas();
-        if (recetas.length == 0) throw new NotFoundException('204 - (No Content) Respuesta vacía.');
+        if (recetas.length == 0) throw new NotFoundException('(NotFound) No se encontró información.');
         return res.status(HttpStatus.OK).json({
             Message: "200 - (Ok) Todo correcto.",
             recetas
