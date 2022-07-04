@@ -37,9 +37,9 @@ export class RecetasService {
         return recetas;
     } 
 
-    // Busca recetas por tipo y retorna un arreglo de recetas ordenas de forma ascendente por nombre del plato.
+    // Busca recetas por tipo y retorna un arreglo de recetas ordenas de forma ascendente por nombre del plato. Tienen que estár validadas.
     async getRecetasporTipo(tipo: string): Promise <Recetas []> {
-        const recetas = await this.recetasModel.find({ tipo: tipo }).sort({nombreReceta: 'asc'});
+        const recetas = await this.recetasModel.find({ tipo: tipo, validada: true }).sort({nombreReceta: 'asc'});
         return recetas;
     } 
 
