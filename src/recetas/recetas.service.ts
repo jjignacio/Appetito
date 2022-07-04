@@ -37,15 +37,15 @@ export class RecetasService {
         return recetas;
     } 
 
-    // Busca recetas por tipo y retorna un arreglo de recetas.
+    // Busca recetas por tipo y retorna un arreglo de recetas ordenas de forma ascendente por nombre del plato.
     async getRecetasporTipo(tipo: string): Promise <Recetas []> {
-        const recetas = await this.recetasModel.find({ tipo: tipo });
+        const recetas = await this.recetasModel.find({ tipo: tipo }).sort({nombreReceta: 'asc'});
         return recetas;
     } 
 
-    // Busca recetas por ingrediente y retorna un arreglo de recetas.
+    // Busca recetas por ingrediente y retorna un arreglo de recetas ordenas de forma ascendente por nombre del plato.
     async getRecetasporIngrediente(ingre: string): Promise <Recetas []> {    
-        const recetas = await this.recetasModel.find().elemMatch('ingredientes', { ingrediente: { $regex: ingre }});
+        const recetas = await this.recetasModel.find().elemMatch('ingredientes', { ingrediente: { $regex: ingre }}).sort({nombreReceta: 'asc'});
         return recetas;
     }
 
