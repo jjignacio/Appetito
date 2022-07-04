@@ -31,9 +31,9 @@ export class RecetasService {
         return recetas;
     } 
 
-    // Busca recetas por usuario y retorna un arreglo de recetas ordenas de forma ascendente por nombre del plato.
+    // Busca recetas por usuario y retorna un arreglo de recetas ordenas de forma ascendente por nombre del plato. Tienen que estár validadas.
     async getRecetasporUsuario( nombreUsuario: string ): Promise <Recetas []> {
-        const recetas = await this.recetasModel.find({ nombreUsuario: { $regex: nombreUsuario }}).sort({nombreReceta: 'asc'});
+        const recetas = await this.recetasModel.find({ nombreUsuario: { $regex: nombreUsuario }, validada: true}).sort({nombreReceta: 'asc'});
         return recetas;
     } 
 
