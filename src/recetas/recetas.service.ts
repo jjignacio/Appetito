@@ -86,8 +86,16 @@ export class RecetasService {
 
     // El objeto {new: true} nos va a devolver la nueva receta actualizada.
     async createReview(id: string, postData): Promise<Recetas> {
-
-        const updateReceta = await this.recetasModel.findByIdAndUpdate({ _id: id }, { $push: {"reseñas": {calificacion: postData.calificacion, comentario: postData.comentario}}}, {new: true});
+        const calificaciones = await this.recetasModel.aggregate([
+            { $group: 
+                {
+                    _id : id , 
+                    avgQuantity: { $avg: "reseñas.calificacion" }
+                }
+            }
+        ]);
+        console.log(calificaciones);
+        const updateReceta = await this.recetasModel.findOneAndUpdate({ _id: id }, { $push: {"reseñas": {calificacion: postData.calificacion, comentario: postData.comentario}}}, {new: true});
         return updateReceta;
     }
 
