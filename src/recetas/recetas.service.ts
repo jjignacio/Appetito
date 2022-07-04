@@ -94,7 +94,8 @@ export class RecetasService {
                 }
             }
         ]);
-        const updateReceta = await this.recetasModel.findByIdAndUpdate({ _id: id }, { puntuacion: calificaciones, $push: {"reseñas": {calificacion: postData.calificacion, comentario: postData.comentario}}}, {new: true});
+        console.log(calificaciones);
+        const updateReceta = await this.recetasModel.findByIdAndUpdate({ _id: id }, { $push: {"reseñas": {calificacion: postData.calificacion, comentario: postData.comentario}}}, {new: true});
         return updateReceta;
     }
 
