@@ -15,7 +15,10 @@ export const RecetasSchema = new Schema ({
     reseñas: [{
             calificacion: Number,
             comentario: String,
-            fecha: Date 
+            fecha: {
+                type: Date,
+                default: Date.now
+            } 
     }],
     puntuacion: Number,
     pasos: [{
