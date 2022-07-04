@@ -45,7 +45,7 @@ export class RecetasService {
 
     // Busca recetas por ingrediente y retorna un arreglo de recetas ordenas de forma ascendente por nombre del plato.
     async getRecetasporIngrediente(ingre: string): Promise <Recetas []> {    
-        const recetas = await this.recetasModel.find().elemMatch('ingredientes', { ingrediente: { $regex: ingre }, validada: true}).sort({nombreReceta: 'asc'});
+        const recetas = await this.recetasModel.find({validada: true}).elemMatch('ingredientes', { ingrediente: { $regex: ingre }}).sort({nombreReceta: 'asc'});
         return recetas;
     }
 
