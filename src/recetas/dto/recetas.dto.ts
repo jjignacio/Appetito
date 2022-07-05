@@ -11,7 +11,7 @@ export class CreateRecetasDTO {
     dificultad: string;
     tipo: string;
     validada: boolean;
-    reseñas: [ 
+    reviews: [ 
         {
             calificacion: number,
             comentario: string,

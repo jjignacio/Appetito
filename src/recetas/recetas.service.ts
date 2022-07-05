@@ -102,7 +102,7 @@ export class RecetasService {
     }*/
 
     async createReview(Id: string, postData): Promise<Recetas> {
-        const updatedReceta = await this.recetasModel.findOneAndUpdate({_id: Id}, { $push: {"reseñas": {calificacion: postData.calificacion, comentario: postData.comentario}}}, {new : true});
+        const updatedReceta = await this.recetasModel.findOneAndUpdate({_id: Id}, { $push: {"reviews": {calificacion: postData.calificacion, comentario: postData.comentario}}}, {new : true});
         return updatedReceta;
     }
 

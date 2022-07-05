@@ -11,7 +11,7 @@ export interface Recetas extends Document {
     dificultad: string;
     tipo: string;
     validada: boolean;
-    reseñas: [ 
+    reviews: [ 
         {
             calificacion: number,
             comentario: string,
