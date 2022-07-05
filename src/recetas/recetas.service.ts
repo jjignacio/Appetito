@@ -101,6 +101,11 @@ export class RecetasService {
         return updateReceta;
     }*/
 
+    async createReview(Id: string, postData): Promise<Recetas> {
+        const updatedReceta = await this.recetasModel.findOneAndUpdate({_id: Id}, { $push: {"reseñas": {calificacion: postData.calificacion, comentario: postData.comentario}}}, {new : true});
+        return updatedReceta;
+    }
+
     async deleteReceta (id: string ): Promise<Recetas> {
         const deleteReceta = await this.recetasModel.findByIdAndDelete(id);
         return deleteReceta;

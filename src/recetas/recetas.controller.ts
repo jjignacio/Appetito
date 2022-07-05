@@ -121,7 +121,7 @@ export class RecetasController {
         });
     }
 
-    /*@Put('/review/:Id')
+    @Put('/review/:Id')
     async createReview(@Res() res, @Param('Id') Id, @Body() postData: { calificacion: number; comentario?: string;} ) {
         const review = await this.recetaService.createReview(Id, postData);
         if (!review) throw new NotFoundException('404 - (NotFound) No se encontró información.');
@@ -129,6 +129,6 @@ export class RecetasController {
             message: '200 - (Created) Reseña creada.',
             review: review
         });
-    }*/
+    }
 }
  
