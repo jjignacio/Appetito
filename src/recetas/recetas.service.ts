@@ -110,8 +110,9 @@ export class RecetasService {
                 }
             }
         ]);
+        const puntuacion = calificaciones[0].avgQuantity;
         await this.recetasModel.findOneAndUpdate({_id: Id}, { $push: {"reviews": {calificacion: postData.calificacion, comentario: postData.comentario}}});
-        const updatedReceta = await this.recetasModel.findOneAndUpdate({_id: Id}, { puntuacion: calificaciones}, {new : true});
+        const updatedReceta = await this.recetasModel.findOneAndUpdate({_id: Id}, { puntuacion: puntuacion}, {new : true});
         return updatedReceta;
     }
 
