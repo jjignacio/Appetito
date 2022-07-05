@@ -110,8 +110,7 @@ export class RecetasService {
                 }
             }
         ]);
-        console.log(calificaciones);
-        const updatedReceta = await this.recetasModel.findOneAndUpdate({_id: Id}, { $push: {"reviews": {calificacion: postData.calificacion, comentario: postData.comentario}}}, {new : true});
+        const updatedReceta = await this.recetasModel.findOneAndUpdate({_id: Id}, { puntuacion: calificaciones, $push: {"reviews": {calificacion: postData.calificacion, comentario: postData.comentario}}}, {new : true});
         return updatedReceta;
     }
 
