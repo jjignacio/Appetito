@@ -106,7 +106,7 @@ export class RecetasService {
             { $group: 
                 {
                     _id : Id , 
-                    avgQuantity: { $avg: "$reviews.calificacion" }
+                    avgQuantity: { $avg: "$calificacion" }
                 }
             }
         ]);
