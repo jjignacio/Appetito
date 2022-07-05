@@ -102,14 +102,18 @@ export class RecetasService {
     }*/
 
     async createReview(Id: string, postData): Promise<Recetas> {
-        const calificaciones = await this.recetasModel.aggregate([
+
+        // 1. Get the product's Comments array of comment ids.
+        const calificaciones = await this.recetasModel.findOne({_id: Id}, { $group: { avgQuantity: { $avg: "$reviews.calificacion" }}});
+
+        /*const calificaciones = await this.recetasModel.aggregate([
             { $group: 
                 {
                     _id : Id , 
-                    avgQuantity: { $avg: "$calificacion" }
+                    avgQuantity: { $avg: "$reviews.calificacion" }
                 }
             }
-        ]);
+        ]);*/
         const puntuacion = calificaciones[0].avgQuantity;
         await this.recetasModel.findOneAndUpdate({_id: Id}, { $push: {"reviews": {calificacion: postData.calificacion, comentario: postData.comentario}}});
         const updatedReceta = await this.recetasModel.findOneAndUpdate({_id: Id}, { puntuacion: puntuacion}, {new : true});
