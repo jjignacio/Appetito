@@ -15,7 +15,7 @@ export interface Recetas extends Document {
         {
             calificacion: number,
             comentario: string,
-            fecha: Date 
+            fecha: Date
         } 
     ];
     puntuacion: number;
@@ -33,6 +33,6 @@ export interface Recetas extends Document {
             cantidad: string,
             unidad: string
         }
-    ]
+    ];
     createdAt: Date;
 }
