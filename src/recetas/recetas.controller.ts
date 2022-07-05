@@ -122,7 +122,7 @@ export class RecetasController {
     }
 
     @Put('/review/:Id')
-    async createReview(@Res() res, @Param('Id') Id, @Body() postData: { calificacion: Number, comentario?: String} ) {
+    async createReview(@Res() res, @Param('Id') Id, @Body() postData: { calificacion: number; comentario?: string;} ) {
         const review = await this.recetaService.createReview(Id, postData);
         if (!review) throw new NotFoundException('404 - (NotFound) No se encontró información.');
         return res.status(HttpStatus.OK).json({
