@@ -101,7 +101,10 @@ export class RecetasService {
         return updateReceta;
     }*/
 
-    async createReview(Id: string, postData): Promise<Recetas> {
+    async createReview(Id: string, postData): Promise<Recetas> {        
+        // Primero inserto la reseña con la calificación.
+        await this.recetasModel.findOneAndUpdate({_id: Id}, { $push: {"reviews": {calificacion: postData.calificacion, comentario: postData.comentario}}});
+        // Calculo el promedio de las calificación.
         const receta = await this.recetasModel.findOne({_id: Id});
         var suma = 0;
         var contador = 0;
@@ -110,7 +113,7 @@ export class RecetasService {
             contador++;
         });
         const puntuacion = suma / contador;
-        await this.recetasModel.findOneAndUpdate({_id: Id}, { $push: {"reviews": {calificacion: postData.calificacion, comentario: postData.comentario}}});
+        // Actualizo la puntiación de la receta.
         const updatedReceta = await this.recetasModel.findOneAndUpdate({_id: Id}, { puntuacion: puntuacion}, {new : true});
         return updatedReceta;
     }
