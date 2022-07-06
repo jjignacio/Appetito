@@ -14,7 +14,7 @@ export interface Recetas extends Document {
     reviews: [ 
         {
             calificacion: number,
-            comentario: string
+            usuario: string
         } 
     ];
     puntuacion: number;

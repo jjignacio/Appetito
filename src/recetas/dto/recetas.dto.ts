@@ -14,7 +14,7 @@ export class CreateRecetasDTO {
     reviews: [ 
         {
             calificacion: number,
-            comentario: string
+            usuario: string
         } 
     ];
     puntuacion: number;

@@ -14,7 +14,7 @@ export const RecetasSchema = new Schema ({
     validada: Boolean,
     reviews: [{
             calificacion: Number,
-            comentario: String
+            usuario: String
     }],
     puntuacion: Number,
     pasos: [{
