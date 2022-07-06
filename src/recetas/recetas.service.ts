@@ -88,11 +88,11 @@ export class RecetasService {
         const receta = await this.recetasModel.findOne({_id: Id});
         if (receta) {
             // Primero inserto la reseña con la calificación.
-            await this.recetasModel.findOneAndUpdate({_id: Id}, { $push: {"reviews": {calificacion: postData.calificacion, comentario: postData.comentario}}});
+            const newReceta = await this.recetasModel.findOneAndUpdate({_id: Id}, { $push: {"reviews": {calificacion: postData.calificacion, comentario: postData.comentario}}}, {new : true});
             // Calculo el promedio de las calificación.
             var suma = 0;
             var contador = 0;
-            receta.reviews.forEach((review) => {
+            newReceta.reviews.forEach((review) => {
                 suma = suma + review.calificacion;
                 contador++;
             });
