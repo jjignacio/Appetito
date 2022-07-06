@@ -84,38 +84,23 @@ export class RecetasService {
         }
     }
 
-    // El objeto {new: true} nos va a devolver la nueva receta actualizada.
-    /*async createReview(id: string, postData): Promise<Recetas> {
-        const calificaciones = await this.recetasModel.aggregate([
-            { $group: 
-                {
-                    _id : id , 
-                    avgQuantity: { $avg: "reseñas.calificacion" }
-                }
-            }
-        ]);
-        console.log(calificaciones);
-
-        const updateReceta = await this.recetasModel.findOneAndUpdate({ _id: id }, { $push: {"reseñas": {calificacion: postData.calificacion, comentario: postData.comentario}}}, {new: true});
-
-        return updateReceta;
-    }*/
-
-    async createReview(Id: string, postData): Promise<Recetas> {        
-        // Primero inserto la reseña con la calificación.
-        await this.recetasModel.findOneAndUpdate({_id: Id}, { $push: {"reviews": {calificacion: postData.calificacion, comentario: postData.comentario}}});
-        // Calculo el promedio de las calificación.
+    async createReview(Id: string, postData): Promise<Recetas> {
         const receta = await this.recetasModel.findOne({_id: Id});
-        var suma = 0;
-        var contador = 0;
-        receta.reviews.forEach((review) => {
-            suma = suma + review.calificacion;
-            contador++;
-        });
-        const puntuacion = suma / contador;
-        // Actualizo la puntiación de la receta.
-        const updatedReceta = await this.recetasModel.findOneAndUpdate({_id: Id}, { puntuacion: puntuacion}, {new : true});
-        return updatedReceta;
+        if (receta) {
+            // Primero inserto la reseña con la calificación.
+            await this.recetasModel.findOneAndUpdate({_id: Id}, { $push: {"reviews": {calificacion: postData.calificacion, comentario: postData.comentario}}});
+            // Calculo el promedio de las calificación.
+            var suma = 0;
+            var contador = 0;
+            receta.reviews.forEach((review) => {
+                suma = suma + review.calificacion;
+                contador++;
+            });
+            const puntuacion = suma / contador;
+            // Actualizo la puntiación de la receta.
+            const updatedReceta = await this.recetasModel.findOneAndUpdate({_id: Id}, { puntuacion: puntuacion}, {new : true});
+            return updatedReceta;
+        }
     }
 
     async deleteReceta (id: string ): Promise<Recetas> {
