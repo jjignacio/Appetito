@@ -96,7 +96,7 @@ export class RecetasService {
                 suma = suma + review.calificacion;
                 contador++;
             });
-            const puntuacion = suma / contador;
+            const puntuacion = Math.round(suma / contador);
             // Actualizo la puntiación de la receta.
             const updatedReceta = await this.recetasModel.findOneAndUpdate({_id: Id}, { puntuacion: puntuacion}, {new : true});
             return updatedReceta;
