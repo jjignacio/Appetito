@@ -21,7 +21,7 @@ export class RecetasService {
 
     // Busca una receta por su Id y que estén validadas. 
     async getReceta(id: string): Promise <Recetas> {
-       const receta = await this.recetasModel.findOne({ _id: id, validada: true });
+       const receta = await this.recetasModel.findOne({ _id: id });
        return receta;
     }
 
