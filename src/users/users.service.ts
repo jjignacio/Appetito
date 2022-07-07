@@ -80,9 +80,9 @@ export class UsersService {
             gender: "", 
             birth: "", 
             recoveryCode: "", 
-            image: "https://img.freepik.com/vector-gratis/perfil-avatar-hombre-icono-redondo_24640-14044.jpg?w=740",
-            favorites: {idReceta: "", nameReceta: "", createdAt: ""},
-            recetas: {idReceta: "", nameReceta: "", createdAt: ""} });
+            image: "",
+            favorites: [],
+            recetas: [] });
         return await user.save();
     }
 
